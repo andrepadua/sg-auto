@@ -5,6 +5,7 @@
  */
 package FORM;
 
+import BEAN.appBean;
 import CLASS.bgImageDesktop;
 import CONS.*;
 import MDIFORMS.*;
@@ -24,6 +25,9 @@ public class MDIApp extends javax.swing.JFrame {
      * Creates new form MDIApp
      */
     public MDIApp() {
+        
+        appBean ab = new appBean();
+        
         initComponents();
         this.setLocationRelativeTo(null);
         this.setMaximumSize(null);
@@ -31,7 +35,7 @@ public class MDIApp extends javax.swing.JFrame {
         this.setIconImage(new ImageIcon(iconURL).getImage());
         desktop.setBorder(new bgImageDesktop());
         this.setExtendedState(MDIApp.MAXIMIZED_BOTH);
-        this.setTitle("SGM - Sistema de Gerenciamento de Montadora");
+        this.setTitle(ab.getTituloExtenso());
         this.pCheckMenu();
     }
 

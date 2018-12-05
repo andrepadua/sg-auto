@@ -7,7 +7,6 @@ import Class.ClsConn;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -23,27 +22,9 @@ public class frmLogin extends javax.swing.JFrame {
     public frmLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.PreencherComboServer();
-        this.PreencherComboSid();
         URL iconURL = getClass().getResource("/ICON/login.png");
         this.setIconImage(new ImageIcon(iconURL).getImage());
         this.setTitle("Login");
-    }
-
-    private void PreencherComboServer() {
-        DefaultComboBoxModel modelCategoria = new DefaultComboBoxModel();
-        modelCategoria.addElement("192.168.0.7");
-        modelCategoria.addElement("localhost");
-        cboServidor.removeAllItems();
-        cboServidor.setModel(modelCategoria);
-    }
-
-    private void PreencherComboSid() {
-        DefaultComboBoxModel modelCategoria = new DefaultComboBoxModel();
-        modelCategoria.addElement("saaed");
-        modelCategoria.addElement("xe");
-        cboSid.removeAllItems();
-        cboSid.setModel(modelCategoria);
     }
 
     public static String username;
@@ -83,12 +64,8 @@ public class frmLogin extends javax.swing.JFrame {
         txtLoginName = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         lblLoginName = new javax.swing.JLabel();
-        lblServidor = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
-        cboServidor = new javax.swing.JComboBox();
         lblPassword = new javax.swing.JLabel();
-        lblSid = new javax.swing.JLabel();
-        cboSid = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -102,8 +79,6 @@ public class frmLogin extends javax.swing.JFrame {
 
         lblLoginName.setText("Usuário:");
 
-        lblServidor.setText("Servidor:");
-
         btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,18 +86,7 @@ public class frmLogin extends javax.swing.JFrame {
             }
         });
 
-        cboServidor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboServidor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboServidorActionPerformed(evt);
-            }
-        });
-
         lblPassword.setText("Senha:");
-
-        lblSid.setText("Sid:");
-
-        cboSid.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,17 +100,14 @@ public class frmLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(btnCancel))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblLoginName)
-                            .addComponent(lblServidor)
-                            .addComponent(lblPassword)
-                            .addComponent(lblSid))
+                            .addComponent(lblPassword))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cboServidor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtLoginName, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                            .addComponent(txtPassword)
-                            .addComponent(cboSid, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txtPassword))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -160,15 +121,7 @@ public class frmLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboServidor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblServidor))
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSid)
-                    .addComponent(cboSid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConnect)
                     .addComponent(btnCancel))
@@ -181,8 +134,6 @@ public class frmLogin extends javax.swing.JFrame {
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         username = txtLoginName.getText();
         password = txtPassword.getText();
-        server = (String) cboServidor.getSelectedItem();
-        sid = (String) cboSid.getSelectedItem();
         msg = null;
         try {
             ClsConn conn = new ClsConn();
@@ -209,10 +160,6 @@ public class frmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnCancelActionPerformed
-
-    private void cboServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboServidorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboServidorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,12 +200,8 @@ public class frmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConnect;
-    private javax.swing.JComboBox cboServidor;
-    private javax.swing.JComboBox cboSid;
     private javax.swing.JLabel lblLoginName;
     private javax.swing.JLabel lblPassword;
-    private javax.swing.JLabel lblServidor;
-    private javax.swing.JLabel lblSid;
     private javax.swing.JTextField txtLoginName;
     private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
