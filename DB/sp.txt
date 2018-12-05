@@ -1,0 +1,335 @@
+SQL> @ACME9.sql
+
+Tablespace criado.
+
+
+Tablespace criado.
+
+
+Usuário criado.
+
+
+Usuário alterado.
+
+
+Usuário alterado.
+
+
+Tabela criada.
+
+
+Sequência criada.
+
+
+Gatilho criado.
+
+
+Gatilho criado.
+
+
+Tabela criada.
+
+
+Sequência criada.
+
+
+Gatilho criado.
+
+
+Gatilho criado.
+
+
+Tabela criada.
+
+
+Sequência criada.
+
+
+Gatilho criado.
+
+
+Gatilho criado.
+
+
+Tabela criada.
+
+
+Sequência criada.
+
+
+Gatilho criado.
+
+
+Gatilho criado.
+
+
+Tabela criada.
+
+
+Sequência criada.
+
+
+Gatilho criado.
+
+
+Gatilho criado.
+
+
+Tabela criada.
+
+
+Sequência criada.
+
+
+Gatilho criado.
+
+
+Gatilho criado.
+
+
+Tabela criada.
+
+
+Sequência criada.
+
+
+Gatilho criado.
+
+
+Gatilho criado.
+
+
+Tabela criada.
+
+
+Sequência criada.
+
+
+Gatilho criado.
+
+
+Gatilho criado.
+
+
+Tabela criada.
+
+
+Sequência criada.
+
+
+Gatilho criado.
+
+
+Gatilho criado.
+
+
+Tabela criada.
+
+
+Sequência criada.
+
+
+Gatilho criado.
+
+
+Gatilho criado.
+
+
+Tabela alterada.
+
+
+Tabela alterada.
+
+
+Tabela alterada.
+
+
+Tabela alterada.
+
+
+Tabela alterada.
+
+
+Tabela alterada.
+
+
+Tabela alterada.
+
+
+Tabela alterada.
+
+
+Tabela alterada.
+
+
+Tabela alterada.
+
+
+Tabela alterada.
+
+
+Tabela alterada.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+
+Comentário criado.
+
+SQL> spool off
