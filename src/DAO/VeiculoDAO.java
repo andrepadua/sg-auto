@@ -103,7 +103,7 @@ public class VeiculoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.PKG_VEICULO.sp_inc_veiculo(?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_inc_veiculo(?, ?, ?, ?)}");
             cst.setString(1, V.getNOM_VEICULO());
             cst.setInt(2, V.getSEQ_TIPOVEICULO());
             cst.setInt(3, V.getSEQ_CONCESSIONARIA());
@@ -136,7 +136,7 @@ public class VeiculoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_alt_veiculo(?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_alt_veiculo(?, ?, ?, ?)}");
             cst.setString(1, V.getNOM_VEICULO());
             cst.setInt(2, V.getSEQ_TIPOVEICULO());
             cst.setInt(3, V.getSEQ_CONCESSIONARIA());
@@ -169,7 +169,7 @@ public class VeiculoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_del_veiculo(?)}");
+            cst = cn.prepareCall("{call sp_del_veiculo(?)}");
             cst.setInt(1, SEQ_VEICULO);
 
             int r = cst.executeUpdate();

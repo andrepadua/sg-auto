@@ -95,7 +95,7 @@ public class PecaDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_inc_peca(?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_inc_peca(?, ?, ?, ?)}");
             cst.setString(1, pc.getNOM_PECA());
             cst.setInt(2, pc.getSEQ_FORNECEDOR());
             cst.setInt(3, pc.getFLG_PROD_MONT());
@@ -128,7 +128,7 @@ public class PecaDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_alt_peca(?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_alt_peca(?, ?, ?, ?)}");
             cst.setString(1, pc.getNOM_PECA());
             cst.setInt(2, pc.getSEQ_FORNECEDOR());
             cst.setInt(3, pc.getFLG_PROD_MONT());
@@ -161,7 +161,7 @@ public class PecaDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_del_peca(?)}");
+            cst = cn.prepareCall("{call sp_del_peca(?)}");
             cst.setInt(1, SEQ_PECA);
 
             int r = cst.executeUpdate();

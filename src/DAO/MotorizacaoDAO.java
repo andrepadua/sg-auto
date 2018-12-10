@@ -99,7 +99,7 @@ public class MotorizacaoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_inc_motorizacao(?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_inc_motorizacao(?, ?, ?, ?, ?, ?)}");
             cst.setInt(1, M.getNUM_POTENCIA());
             cst.setDouble(2, M.getNUM_VELOCIDADE_FINAL());
             cst.setDouble(3, M.getNUM_AUTONOMIA());
@@ -134,7 +134,7 @@ public class MotorizacaoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_alt_motorizacao(?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_alt_motorizacao(?, ?, ?, ?, ?, ?)}");
             cst.setInt(1, M.getNUM_POTENCIA());
             cst.setDouble(2, M.getNUM_VELOCIDADE_FINAL());
             cst.setDouble(3, M.getNUM_AUTONOMIA());
@@ -169,7 +169,7 @@ public class MotorizacaoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_del_motorizacao(?)}");
+            cst = cn.prepareCall("{call sp_del_motorizacao(?)}");
             cst.setInt(1, SEQ_MOTORIZACAO);
 
             int r = cst.executeUpdate();

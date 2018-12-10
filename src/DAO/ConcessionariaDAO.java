@@ -101,7 +101,7 @@ public class ConcessionariaDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_inc_concessionaria(?, ?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_inc_concessionaria(?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, C.getNOM_CONCESSIONARIA());
             cst.setString(2, C.getNUM_CNPJ());
             cst.setString(3, C.getDSC_RAZAO_SOCIAL());
@@ -137,7 +137,7 @@ public class ConcessionariaDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_alt_concessionaria(?, ?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_alt_concessionaria(?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, C.getNOM_CONCESSIONARIA());
             cst.setString(2, C.getNUM_CNPJ());
             cst.setString(3, C.getDSC_RAZAO_SOCIAL());
@@ -173,7 +173,7 @@ public class ConcessionariaDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_del_fornecedor(?)}");
+            cst = cn.prepareCall("{call sp_del_fornecedor(?)}");
             cst.setInt(1, SEQ_CONCESSIONARIA);
 
             int r = cst.executeUpdate();

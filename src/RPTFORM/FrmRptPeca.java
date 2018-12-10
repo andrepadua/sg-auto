@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package RPTFORM;
 
 import BEAN.appBean;
-import BUS.FornecedorBUS;
 import BUS.PecaBUS;
-import FORM.frmLogin;
 import MODELS.Peca;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -95,7 +88,7 @@ public class FrmRptPeca extends javax.swing.JInternalFrame {
         //estabelece conexão
         Connection connection = establishConnection();
         Statement stm = connection.createStatement();
-        String query = "SELECT P.SEQ_PECA, P.NOM_PECA, F.NOM_FORNECEDOR, DECODE(P.FLG_PROD_MONT, 1, 'Sim', 0, 'Não') PROD_MONTADORA FROM ACME9.PECA P INNER JOIN ACME9.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR)";
+        String query = "SELECT P.SEQ_PECA, P.NOM_PECA, F.NOM_FORNECEDOR, DECODE(P.FLG_PROD_MONT, 1, 'Sim', 0, 'Não') PROD_MONTADORA FROM SGA.PECA P INNER JOIN SGA.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR)";
         ResultSet rs = stm.executeQuery(query);
 
         //implementação da interface JRDataSource para DataSource ResultSet
@@ -190,7 +183,7 @@ public class FrmRptPeca extends javax.swing.JInternalFrame {
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         try {
-            gerar("C:\\Users\\André\\Google Drive\\jProj\\SGAUTO\\src\\REPORTS\\RptPeca.jrxml");
+            gerar("C:\\sg-auto\\src\\REPORTS\\RptPeca.jrxml");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         } catch (JRException | SQLException ex) {

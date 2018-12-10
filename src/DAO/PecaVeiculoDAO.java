@@ -50,7 +50,7 @@ public class PecaVeiculoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_inc_pecaveiculo(?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_inc_pecaveiculo(?, ?, ?)}");
             cst.setInt(1, pcv.getSEQ_PECA());
             cst.setInt(2, pcv.getSEQ_VEICULO());
             cst.registerOutParameter(3, java.sql.Types.INTEGER);
@@ -82,7 +82,7 @@ public class PecaVeiculoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_alt_pecaveiculo(?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_alt_pecaveiculo(?, ?, ?)}");
             cst.setInt(1, pcv.getSEQ_PECA());
             cst.setInt(2, pcv.getSEQ_VEICULO());
             cst.setInt(3, pcv.getSEQ_PECAVEICULO());
@@ -114,7 +114,7 @@ public class PecaVeiculoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_del_pecaveiculo(?)}");
+            cst = cn.prepareCall("{call sp_del_pecaveiculo(?)}");
             cst.setInt(1, SEQ_PECAVEICULO);
 
             int r = cst.executeUpdate();

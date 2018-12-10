@@ -140,7 +140,7 @@ public class FornecedorDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_alt_fornecedor(?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_alt_fornecedor(?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, F.getNOM_FORNECEDOR());
             cst.setString(2, F.getNOM_FANTASIA());
             cst.setString(3, F.getNUM_CNPJ());
@@ -177,7 +177,7 @@ public class FornecedorDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_del_fornecedor(?)}");
+            cst = cn.prepareCall("{call sp_del_fornecedor(?)}");
             cst.setInt(1, SEQ_FORNECEDOR);
 
             int r = cst.executeUpdate();

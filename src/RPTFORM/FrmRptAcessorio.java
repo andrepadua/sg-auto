@@ -82,7 +82,7 @@ public class FrmRptAcessorio extends javax.swing.JInternalFrame {
         //estabelece conexão
         Connection connection = establishConnection();
         Statement stm = connection.createStatement();
-        String query = "SELECT A.SEQ_ACESSORIO, A.NOM_ACESSORIO, A.VAL_ACESSORIO, M.DSC_MOTORIZACAO, F.NOM_FORNECEDOR FROM ACME9.ACESSORIO A INNER JOIN ACME9.MOTORIZACAO M ON (M.SEQ_MOTORIZACAO = A.SEQ_MOTORIZACAO) INNER JOIN ACME9.FORNECEDOR F ON (F.SEQ_FORNECEDOR = A.SEQ_FORNECEDOR)";
+        String query = "SELECT A.SEQ_ACESSORIO, A.NOM_ACESSORIO, A.VAL_ACESSORIO, M.DSC_MOTORIZACAO, F.NOM_FORNECEDOR FROM SGA.ACESSORIO A INNER JOIN SGA.MOTORIZACAO M ON (M.SEQ_MOTORIZACAO = A.SEQ_MOTORIZACAO) INNER JOIN SGA.FORNECEDOR F ON (F.SEQ_FORNECEDOR = A.SEQ_FORNECEDOR)";
         ResultSet rs = stm.executeQuery(query);
 
         //implementação da interface JRDataSource para DataSource ResultSet
@@ -177,7 +177,7 @@ public class FrmRptAcessorio extends javax.swing.JInternalFrame {
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         try {
-            gerar("C:\\Users\\André\\Google Drive\\jProj\\SGAUTO\\src\\REPORTS\\RptAcessorio.jrxml");
+            gerar("C:\\sg-auto\\src\\REPORTS\\RptAcessorio.jrxml");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         } catch (JRException | SQLException ex) {

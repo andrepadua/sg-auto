@@ -80,7 +80,7 @@ public class FrmRptVeiculo extends javax.swing.JInternalFrame {
         //estabelece conexão
         Connection connection = establishConnection();
         Statement stm = connection.createStatement();
-        String query = "SELECT V.SEQ_VEICULO, V.NOM_VEICULO, TV.NOM_TIPOVEICULO, C.NOM_CONCESSIONARIA FROM ACME9.VEICULO V INNER JOIN ACME9.TIPOVEICULO TV ON (TV.SEQ_TIPOVEICULO = V.SEQ_TIPOVEICULO) INNER JOIN ACME9.CONCESSIONARIA C ON (C.SEQ_CONCESSIONARIA = V.SEQ_CONCESSIONARIA)";
+        String query = "SELECT V.SEQ_VEICULO, V.NOM_VEICULO, TV.NOM_TIPOVEICULO, C.NOM_CONCESSIONARIA FROM SGA.VEICULO V INNER JOIN SGA.TIPOVEICULO TV ON (TV.SEQ_TIPOVEICULO = V.SEQ_TIPOVEICULO) INNER JOIN SGA.CONCESSIONARIA C ON (C.SEQ_CONCESSIONARIA = V.SEQ_CONCESSIONARIA)";
         ResultSet rs = stm.executeQuery(query);
 
         //implementação da interface JRDataSource para DataSource ResultSet
@@ -175,7 +175,7 @@ public class FrmRptVeiculo extends javax.swing.JInternalFrame {
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         try {
-            gerar("C:\\Users\\André\\Google Drive\\jProj\\SGAUTO\\src\\REPORTS\\RptVeiculo.jrxml");
+            gerar("C:\\sg-auto\\src\\REPORTS\\RptVeiculo.jrxml");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         } catch (JRException | SQLException ex) {

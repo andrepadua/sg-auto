@@ -68,7 +68,7 @@ public class UsuarioDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.PKG_USUARIO.sp_inc_usuario(?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_inc_usuario(?, ?, ?, ?)}");
             cst.setString(1, u.getNOM_USUARIO());
             cst.setString(2, u.getLOGINNAME());
             cst.setInt(3, u.getSEQ_PERFIL());
@@ -101,7 +101,7 @@ public class UsuarioDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.PKG_USUARIO.sp_alt_usuario(?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_alt_usuario(?, ?, ?, ?)}");
             cst.setString(1, u.getNOM_USUARIO());
             cst.setString(2, u.getLOGINNAME());
             cst.setInt(3, u.getSEQ_PERFIL());
@@ -134,7 +134,7 @@ public class UsuarioDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.PKG_USUARIO.sp_del_usuario(?)}");
+            cst = cn.prepareCall("{call sp_del_usuario(?)}");
             cst.setInt(1, SEQ_USUARIO);
 
             int r = cst.executeUpdate();

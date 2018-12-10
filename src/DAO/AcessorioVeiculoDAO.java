@@ -120,7 +120,7 @@ public class AcessorioVeiculoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_alt_acessorioveiculo(?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_alt_acessorioveiculo(?, ?, ?)}");
             cst.setInt(1, av.getSEQ_ACESSORIO());
             cst.setInt(2, av.getSEQ_VEICULO());
             cst.setInt(3, av.getSEQ_ACESSORIOVEICULO());
@@ -152,7 +152,7 @@ public class AcessorioVeiculoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_del_acessorioveiculo(?)}");
+            cst = cn.prepareCall("{call sp_del_acessorioveiculo(?)}");
             cst.setInt(1, SEQ_ACESSORIOVEICULO);
 
             int r = cst.executeUpdate();

@@ -99,7 +99,7 @@ public class TipoMotorizacaoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_alt_tipomotorizacao(?, ?)}");
+            cst = cn.prepareCall("{call sp_alt_tipomotorizacao(?, ?)}");
             cst.setString(1, tm.getDESC_TIPOMOTORIZACAO());
             cst.setInt(2, tm.getSEQ_TIPOMOTORIZACAO());
 
@@ -130,7 +130,7 @@ public class TipoMotorizacaoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_del_tipomotorizacao(?)}");
+            cst = cn.prepareCall("{call sp_del_tipomotorizacao(?)}");
             cst.setInt(1, SEQ_TIPOMOTORIZACAO);
 
             int r = cst.executeUpdate();
