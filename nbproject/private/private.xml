@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/sg-auto/src/CLASS/ClsConn.java</file>
-            <file>file:/C:/sg-auto/src/RPTFORM/FrmRptAcessorio.java</file>
-            <file>file:/C:/sg-auto/src/CLASS/SegSistema.java</file>
-            <file>file:/C:/sg-auto/src/FORM/frmLogin.java</file>
+            <file>file:/C:/sg-auto/src/BUS/FornecedorBUS.java</file>
+            <file>file:/C:/sg-auto/src/DAO/TipoVeiculoDAO.java</file>
+            <file>file:/C:/sg-auto/src/MDIFORMS/FrmCadFornecedor.java</file>
+            <file>file:/C:/sg-auto/src/DAO/AcessorioDAO.java</file>
+            <file>file:/C:/sg-auto/src/MDIFORMS/FrmCadTipoVeiculo.java</file>
+            <file>file:/C:/sg-auto/src/DAO/FornecedorDAO.java</file>
+            <file>file:/C:/sg-auto/src/BEAN/appBean.java</file>
         </group>
     </open-files>
 </project-private>

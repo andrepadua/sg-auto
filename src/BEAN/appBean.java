@@ -22,7 +22,7 @@ public final class appBean {
         this.setPassword("sga");
 
         this.setClassforname("com.mysql.jdbc.Driver");
-        this.setUrl("jdbc:mysql://localhost/sga?user=sga&password=sga");
+        this.setUrl("jdbc:mysql://localhost/sga?user=root&password=root");
     }
 
     public String getTitulo() {

@@ -150,6 +150,7 @@ public class TipoVeiculoDAO {
         }
         return id;
     }
+
     public int ConsultarSeq(String NOM_TIPOVEICULO) throws ClassNotFoundException {
         int Seq = 0;
         try {
