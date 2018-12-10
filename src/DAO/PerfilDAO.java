@@ -1,5 +1,6 @@
 package DAO;
 
+import BEAN.appBean;
 import Class.ClsConn;
 import MODELS.Perfil;
 import java.sql.PreparedStatement;
@@ -10,12 +11,13 @@ import java.util.ArrayList;
 public class PerfilDAO {
 
     ClsConn objConn = new ClsConn();
+    appBean ab = new appBean();
 
     public Perfil Consultar(int SEQ_PERFIL) throws ClassNotFoundException {
         Perfil p = null;
         try {
             objConn.Connect();
-            String sql = "SELECT P.SEQ_PERFIL, P.NOM_PERFIL FROM ACME9.PERFIL P WHERE P.SEQ_PERFIL = " + SEQ_PERFIL;
+            String sql = "SELECT P.SEQ_PERFIL, P.NOM_PERFIL FROM SGA.PERFIL P WHERE P.SEQ_PERFIL = " + SEQ_PERFIL;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -34,7 +36,7 @@ public class PerfilDAO {
         int Seq = 0;
         try {
             objConn.Connect();
-            String sql = "SELECT P.SEQ_PERFIL FROM ACME9.PERFIL P WHERE P.NOM_PERFIL = '" + NOM_PERFIL + "'";
+            String sql = "SELECT P.SEQ_PERFIL FROM SGA.PERFIL P WHERE P.NOM_PERFIL = '" + NOM_PERFIL + "'";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -55,7 +57,7 @@ public class PerfilDAO {
         ArrayList<Perfil> lstP = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT P.SEQ_PERFIL, P.NOM_PERFIL FROM ACME9.PERFIL P";
+            String sql = "SELECT P.SEQ_PERFIL, P.NOM_PERFIL FROM SGA.PERFIL P";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 

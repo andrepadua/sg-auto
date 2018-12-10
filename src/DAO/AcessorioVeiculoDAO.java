@@ -1,5 +1,6 @@
 package DAO;
 
+import BEAN.appBean;
 import Class.ClsConn;
 import MODELS.AcessorioVeiculo;
 import java.sql.CallableStatement;
@@ -10,19 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Thiago Xavier
- */
 public class AcessorioVeiculoDAO {
 
     ClsConn objConn = new ClsConn();
+    appBean ab = new appBean();
 
     public AcessorioVeiculo ConsultarAcessorio(int SEQ_ACESSORIO) throws ClassNotFoundException {
         AcessorioVeiculo av = null;
         try {
             objConn.Connect();
-            String sql = "SELECT AV.SEQ_ACESSORIOVEICULO, AV.SEQ_ACESSORIO, AV.SEQ_VEICULO, A.NOM_ACESSORIO, V.NOM_VEICULO FROM ACME9.ACESSORIOVEICULO AV INNER JOIN ACME9.VEICULO V ON (V.SEQ_VEICULO = AV.SEQ_VEICULO) INNER JOIN ACME9.ACESSORIO A ON (A.SEQ_ACESSORIO = AV.SEQ_ACESSORIO) WHERE AV.SEQ_ACESSORIO = " + SEQ_ACESSORIO;
+            String sql = "SELECT AV.SEQ_ACESSORIOVEICULO, AV.SEQ_ACESSORIO, AV.SEQ_VEICULO, A.NOM_ACESSORIO, V.NOM_VEICULO FROM SGA.ACESSORIOVEICULO AV INNER JOIN SGA.VEICULO V ON (V.SEQ_VEICULO = AV.SEQ_VEICULO) INNER JOIN SGA.ACESSORIO A ON (A.SEQ_ACESSORIO = AV.SEQ_ACESSORIO) WHERE AV.SEQ_ACESSORIO = " + SEQ_ACESSORIO;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -41,7 +39,7 @@ public class AcessorioVeiculoDAO {
         AcessorioVeiculo av = null;
         try {
             objConn.Connect();
-            String sql = "SELECT AV.SEQ_ACESSORIOVEICULO, AV.SEQ_ACESSORIO, AV.SEQ_VEICULO, A.NOM_ACESSORIO, V.NOM_VEICULO FROM ACME9.ACESSORIOVEICULO AV INNER JOIN ACME9.VEICULO V ON (V.SEQ_VEICULO = AV.SEQ_VEICULO) INNER JOIN ACME9.ACESSORIO A ON (A.SEQ_ACESSORIO = AV.SEQ_ACESSORIO) WHERE AV.SEQ_VEICULO = " + SEQ_VEICULO;
+            String sql = "SELECT AV.SEQ_ACESSORIOVEICULO, AV.SEQ_ACESSORIO, AV.SEQ_VEICULO, A.NOM_ACESSORIO, V.NOM_VEICULO FROM SGA.ACESSORIOVEICULO AV INNER JOIN SGA.VEICULO V ON (V.SEQ_VEICULO = AV.SEQ_VEICULO) INNER JOIN SGA.ACESSORIO A ON (A.SEQ_ACESSORIO = AV.SEQ_ACESSORIO) WHERE AV.SEQ_VEICULO = " + SEQ_VEICULO;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -55,12 +53,12 @@ public class AcessorioVeiculoDAO {
         }
         return av;
     }
-    
+
     public ArrayList<AcessorioVeiculo> Consultar() throws ClassNotFoundException {
         ArrayList<AcessorioVeiculo> lstAV = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT AV.SEQ_ACESSORIOVEICULO, AV.SEQ_ACESSORIO, AV.SEQ_VEICULO, A.NOM_ACESSORIO, V.NOM_VEICULO FROM ACME9.ACESSORIOVEICULO AV INNER JOIN ACME9.VEICULO V ON (V.SEQ_VEICULO = AV.SEQ_VEICULO) INNER JOIN ACME9.ACESSORIO A ON (A.SEQ_ACESSORIO = AV.SEQ_ACESSORIO)";
+            String sql = "SELECT AV.SEQ_ACESSORIOVEICULO, AV.SEQ_ACESSORIO, AV.SEQ_VEICULO, A.NOM_ACESSORIO, V.NOM_VEICULO FROM SGA.ACESSORIOVEICULO AV INNER JOIN SGA.VEICULO V ON (V.SEQ_VEICULO = AV.SEQ_VEICULO) INNER JOIN SGA.ACESSORIO A ON (A.SEQ_ACESSORIO = AV.SEQ_ACESSORIO)";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -88,9 +86,9 @@ public class AcessorioVeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_ACESSORIOVEICULO.sp_inc_acessorioveiculo(?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_inc_acessorioveiculo(?, ?, ?)}");
             cst.setInt(1, av.getSEQ_ACESSORIO());
             cst.setInt(2, av.getSEQ_VEICULO());
             cst.registerOutParameter(3, java.sql.Types.INTEGER);
@@ -99,7 +97,7 @@ public class AcessorioVeiculoDAO {
             if (r > 0) {
                 id = cst.getInt(3);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -108,7 +106,7 @@ public class AcessorioVeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -120,9 +118,9 @@ public class AcessorioVeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_ACESSORIOVEICULO.sp_alt_acessorioveiculo(?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_alt_acessorioveiculo(?, ?, ?)}");
             cst.setInt(1, av.getSEQ_ACESSORIO());
             cst.setInt(2, av.getSEQ_VEICULO());
             cst.setInt(3, av.getSEQ_ACESSORIOVEICULO());
@@ -131,7 +129,7 @@ public class AcessorioVeiculoDAO {
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -140,7 +138,7 @@ public class AcessorioVeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -152,16 +150,16 @@ public class AcessorioVeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_ACESSORIOVEICULO.sp_del_acessorioveiculo(?)}");
+            cst = cn.prepareCall("{call SGA.sp_del_acessorioveiculo(?)}");
             cst.setInt(1, SEQ_ACESSORIOVEICULO);
 
             int r = cst.executeUpdate();
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -170,7 +168,7 @@ public class AcessorioVeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;

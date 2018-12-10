@@ -1,7 +1,7 @@
 package DAO;
 
+import BEAN.appBean;
 import Class.ClsConn;
-import FORM.frmLogin;
 import MODELS.PecaVeiculo;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -11,19 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Thiago Xavier
- */
 public class PecaVeiculoDAO {
 
     ClsConn objConn = new ClsConn();
+    appBean ab = new appBean();
 
     public ArrayList<PecaVeiculo> Consultar() throws ClassNotFoundException {
         ArrayList<PecaVeiculo> lstPV = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT PV.SEQ_PECAVEICULO, PV.SEQ_PECA, PV.SEQ_VEICULO, P.NOM_PECA, V.NOM_VEICULO FROM ACME9.PECAVEICULO PV INNER JOIN ACME9.VEICULO V ON (V.SEQ_VEICULO = PV.SEQ_VEICULO) INNER JOIN ACME9.PECA P ON (P.SEQ_PECA = PV.SEQ_PECA)";
+            String sql = "SELECT PV.SEQ_PECAVEICULO, PV.SEQ_PECA, PV.SEQ_VEICULO, P.NOM_PECA, V.NOM_VEICULO FROM SGA.PECAVEICULO PV INNER JOIN SGA.VEICULO V ON (V.SEQ_VEICULO = PV.SEQ_VEICULO) INNER JOIN SGA.PECA P ON (P.SEQ_PECA = PV.SEQ_PECA)";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -51,9 +48,9 @@ public class PecaVeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_PECAVEICULO.sp_inc_pecaveiculo(?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_inc_pecaveiculo(?, ?, ?)}");
             cst.setInt(1, pcv.getSEQ_PECA());
             cst.setInt(2, pcv.getSEQ_VEICULO());
             cst.registerOutParameter(3, java.sql.Types.INTEGER);
@@ -62,7 +59,7 @@ public class PecaVeiculoDAO {
             if (r > 0) {
                 id = cst.getInt(3);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -71,7 +68,7 @@ public class PecaVeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -83,9 +80,9 @@ public class PecaVeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_PECAVEICULO.sp_alt_pecaveiculo(?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_alt_pecaveiculo(?, ?, ?)}");
             cst.setInt(1, pcv.getSEQ_PECA());
             cst.setInt(2, pcv.getSEQ_VEICULO());
             cst.setInt(3, pcv.getSEQ_PECAVEICULO());
@@ -94,7 +91,7 @@ public class PecaVeiculoDAO {
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -103,7 +100,7 @@ public class PecaVeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -115,16 +112,16 @@ public class PecaVeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_PECAVEICULO.sp_del_pecaveiculo(?)}");
+            cst = cn.prepareCall("{call SGA.sp_del_pecaveiculo(?)}");
             cst.setInt(1, SEQ_PECAVEICULO);
 
             int r = cst.executeUpdate();
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -133,7 +130,7 @@ public class PecaVeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;

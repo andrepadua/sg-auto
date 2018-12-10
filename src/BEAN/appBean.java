@@ -9,8 +9,7 @@ public final class appBean {
 
     private String username;
     private String password;
-    private String server;
-    private String sid;
+    private String url;
 
     public appBean() {
         this.setTitulo("SGA");
@@ -23,8 +22,7 @@ public final class appBean {
         //this.server = "192.168.0.7";
         //this.sid = "SAAED";
 
-        this.setServer("localhost");
-        this.setSid("XE");
+        this.setUrl("jdbc:mysql://localhost/sga?user=sga&password=sga");
     }
 
     public String getTitulo() {
@@ -75,19 +73,17 @@ public final class appBean {
         this.password = password;
     }
 
-    public String getServer() {
-        return server;
+    /**
+     * @return the url
+     */
+    public String getUrl() {
+        return url;
     }
 
-    public void setServer(String server) {
-        this.server = server;
-    }
-
-    public String getSid() {
-        return sid;
-    }
-
-    public void setSid(String sid) {
-        this.sid = sid;
+    /**
+     * @param url the url to set
+     */
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -1,7 +1,7 @@
 package DAO;
 
+import BEAN.appBean;
 import Class.ClsConn;
-import FORM.frmLogin;
 import MODELS.Motorizacao;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -11,19 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Thiago Xavier
- */
 public class MotorizacaoDAO {
-    
-        ClsConn objConn = new ClsConn();
+
+    ClsConn objConn = new ClsConn();
+    appBean ab = new appBean();
 
     public Motorizacao Consultar(int SEQ_MOTORIZACAO) throws ClassNotFoundException {
         Motorizacao M = null;
         try {
             objConn.Connect();
-            String sql = "SELECT M.SEQ_MOTORIZACAO, M.NUM_POTENCIA, M.NUM_VELOCIDADE_FINAL, M.NUM_AUTONOMIA, NULL SEQ_TIPOMOTORIZACAO, M.DSC_MOTORIZACAO, TM.DESC_TIPOMOTORIZACAO FROM ACME9.MOTORIZACAO M INNER JOIN ACME9.TIPOMOTORIZACAO TM ON (TM.SEQ_TIPOMOTORIZACAO = M.SEQ_TIPOMOTORIZACAO) WHERE M.SEQ_MOTORIZACAO = " + SEQ_MOTORIZACAO;
+            String sql = "SELECT M.SEQ_MOTORIZACAO, M.NUM_POTENCIA, M.NUM_VELOCIDADE_FINAL, M.NUM_AUTONOMIA, NULL SEQ_TIPOMOTORIZACAO, M.DSC_MOTORIZACAO, TM.DESC_TIPOMOTORIZACAO FROM SGA.MOTORIZACAO M INNER JOIN SGA.TIPOMOTORIZACAO TM ON (TM.SEQ_TIPOMOTORIZACAO = M.SEQ_TIPOMOTORIZACAO) WHERE M.SEQ_MOTORIZACAO = " + SEQ_MOTORIZACAO;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -42,7 +39,7 @@ public class MotorizacaoDAO {
         ArrayList<Motorizacao> lstTv = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT M.SEQ_MOTORIZACAO, M.NUM_POTENCIA, M.NUM_VELOCIDADE_FINAL, M.NUM_AUTONOMIA, NULL SEQ_TIPOMOTORIZACAO, M.DSC_MOTORIZACAO, TM.DESC_TIPOMOTORIZACAO FROM ACME9.MOTORIZACAO M INNER JOIN ACME9.TIPOMOTORIZACAO TM ON (TM.SEQ_TIPOMOTORIZACAO = M.SEQ_TIPOMOTORIZACAO)";
+            String sql = "SELECT M.SEQ_MOTORIZACAO, M.NUM_POTENCIA, M.NUM_VELOCIDADE_FINAL, M.NUM_AUTONOMIA, NULL SEQ_TIPOMOTORIZACAO, M.DSC_MOTORIZACAO, TM.DESC_TIPOMOTORIZACAO FROM SGA.MOTORIZACAO M INNER JOIN SGA.TIPOMOTORIZACAO TM ON (TM.SEQ_TIPOMOTORIZACAO = M.SEQ_TIPOMOTORIZACAO)";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -70,7 +67,7 @@ public class MotorizacaoDAO {
         ArrayList<Motorizacao> lstTv = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT M.SEQ_MOTORIZACAO, M.NUM_POTENCIA, M.NUM_VELOCIDADE_FINAL, M.NUM_AUTONOMIA, NULL SEQ_TIPOMOTORIZACAO, M.DSC_MOTORIZACAO, TM.DESC_TIPOMOTORIZACAO FROM ACME9.MOTORIZACAO M INNER JOIN ACME9.TIPOMOTORIZACAO TM ON (TM.SEQ_TIPOMOTORIZACAO = M.SEQ_TIPOMOTORIZACAO) WHERE M.SEQ_MOTORIZACAO = " + SEQ_MOTORIZACAO;
+            String sql = "SELECT M.SEQ_MOTORIZACAO, M.NUM_POTENCIA, M.NUM_VELOCIDADE_FINAL, M.NUM_AUTONOMIA, NULL SEQ_TIPOMOTORIZACAO, M.DSC_MOTORIZACAO, TM.DESC_TIPOMOTORIZACAO FROM SGA.MOTORIZACAO M INNER JOIN SGA.TIPOMOTORIZACAO TM ON (TM.SEQ_TIPOMOTORIZACAO = M.SEQ_TIPOMOTORIZACAO) WHERE M.SEQ_MOTORIZACAO = " + SEQ_MOTORIZACAO;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -93,16 +90,16 @@ public class MotorizacaoDAO {
         }
         return lstTv;
     }
-    
+
     public int Incluir(Motorizacao M) {
         Connection cn = null;
         CallableStatement cst = null;
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_MOTORIZACAO.sp_inc_motorizacao(?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_inc_motorizacao(?, ?, ?, ?, ?, ?)}");
             cst.setInt(1, M.getNUM_POTENCIA());
             cst.setDouble(2, M.getNUM_VELOCIDADE_FINAL());
             cst.setDouble(3, M.getNUM_AUTONOMIA());
@@ -114,7 +111,7 @@ public class MotorizacaoDAO {
             if (r > 0) {
                 id = cst.getInt(6);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -123,7 +120,7 @@ public class MotorizacaoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -135,21 +132,21 @@ public class MotorizacaoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_MOTORIZACAO.sp_alt_motorizacao(?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_alt_motorizacao(?, ?, ?, ?, ?, ?)}");
             cst.setInt(1, M.getNUM_POTENCIA());
             cst.setDouble(2, M.getNUM_VELOCIDADE_FINAL());
             cst.setDouble(3, M.getNUM_AUTONOMIA());
             cst.setInt(4, M.getSEQ_TIPOMOTORIZACAO());
             cst.setString(5, M.getDSC_MOTORIZACAO());
             cst.setInt(6, M.getSEQ_MOTORIZACAO());
-           
+
             int r = cst.executeUpdate();
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -158,7 +155,7 @@ public class MotorizacaoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -170,16 +167,16 @@ public class MotorizacaoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_MOTORIZACAO.sp_del_motorizacao(?)}");
+            cst = cn.prepareCall("{call SGA.sp_del_motorizacao(?)}");
             cst.setInt(1, SEQ_MOTORIZACAO);
 
             int r = cst.executeUpdate();
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -188,16 +185,17 @@ public class MotorizacaoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
     }
+
     public int ConsultarSeq(String NOM_MOTORIZACAO) throws ClassNotFoundException {
         int Seq = 0;
         try {
             objConn.Connect();
-            String sql = "SELECT M.SEQ_MOTORIZACAO FROM ACME9.MOTORIZACAO M WHERE M.DSC_MOTORIZACAO = '" + NOM_MOTORIZACAO + "'";
+            String sql = "SELECT M.SEQ_MOTORIZACAO FROM SGA.MOTORIZACAO M WHERE M.DSC_MOTORIZACAO = '" + NOM_MOTORIZACAO + "'";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 

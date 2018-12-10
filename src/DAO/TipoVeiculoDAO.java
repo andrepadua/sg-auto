@@ -1,7 +1,7 @@
 package DAO;
 
+import BEAN.appBean;
 import Class.ClsConn;
-import FORM.frmLogin;
 import MODELS.TipoVeiculo;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -14,12 +14,13 @@ import java.util.ArrayList;
 public class TipoVeiculoDAO {
 
     ClsConn objConn = new ClsConn();
+    appBean ab = new appBean();
 
     public TipoVeiculo Consultar(int SEQ_TIPOVEICULO) throws ClassNotFoundException {
         TipoVeiculo tv = null;
         try {
             objConn.Connect();
-            String sql = "SELECT SEQ_TIPOVEICULO, NOM_TIPOVEICULO FROM ACME9.TIPOVEICULO WHERE SEQ_TIPOVEICULO = " + SEQ_TIPOVEICULO;
+            String sql = "SELECT SEQ_TIPOVEICULO, NOM_TIPOVEICULO FROM SGA.TIPOVEICULO WHERE SEQ_TIPOVEICULO = " + SEQ_TIPOVEICULO;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -38,7 +39,7 @@ public class TipoVeiculoDAO {
         ArrayList<TipoVeiculo> lstTv = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT SEQ_TIPOVEICULO, NOM_TIPOVEICULO FROM ACME9.TIPOVEICULO";
+            String sql = "SELECT SEQ_TIPOVEICULO, NOM_TIPOVEICULO FROM SGA.TIPOVEICULO";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -64,9 +65,9 @@ public class TipoVeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_TIPOVEICULO.sp_inc_tipoveiculo(?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_inc_tipoveiculo(?, ?)}");
             cst.setString(1, tv.getNOM_TIPOVEICULO());
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
 
@@ -74,7 +75,7 @@ public class TipoVeiculoDAO {
             if (r > 0) {
                 id = cst.getInt(2);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -83,7 +84,7 @@ public class TipoVeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -95,9 +96,9 @@ public class TipoVeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_TIPOVEICULO.sp_alt_tipoveiculo(?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_alt_tipoveiculo(?, ?)}");
             cst.setString(1, tv.getNOM_TIPOVEICULO());
             cst.setInt(2, tv.getSEQ_TIPOVEICULO());
 
@@ -105,7 +106,7 @@ public class TipoVeiculoDAO {
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -114,7 +115,7 @@ public class TipoVeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -126,16 +127,16 @@ public class TipoVeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_TIPOVEICULO.sp_del_tipoveiculo(?)}");
+            cst = cn.prepareCall("{call SGA.sp_del_tipoveiculo(?)}");
             cst.setInt(1, SEQ_TIPOVEICULO);
 
             int r = cst.executeUpdate();
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -144,7 +145,7 @@ public class TipoVeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -153,7 +154,7 @@ public class TipoVeiculoDAO {
         int Seq = 0;
         try {
             objConn.Connect();
-            String sql = "SELECT TV.SEQ_TIPOVEICULO FROM ACME9.TIPOVEICULO TV WHERE TV.NOM_TIPOVEICULO = '" + NOM_TIPOVEICULO + "'";
+            String sql = "SELECT TV.SEQ_TIPOVEICULO FROM SGA.TIPOVEICULO TV WHERE TV.NOM_TIPOVEICULO = '" + NOM_TIPOVEICULO + "'";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 

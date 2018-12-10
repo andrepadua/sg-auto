@@ -1,7 +1,7 @@
 package DAO;
 
+import BEAN.appBean;
 import Class.ClsConn;
-import FORM.frmLogin;
 import MODELS.Concessionaria;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -11,19 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Thiago Xavier
- */
 public class ConcessionariaDAO {
 
     ClsConn objConn = new ClsConn();
+    appBean ab = new appBean();
 
     public Concessionaria Consultar(int SEQ_CONCESSIONARIA) throws ClassNotFoundException {
         Concessionaria C = null;
         try {
             objConn.Connect();
-            String sql = "SELECT C.SEQ_CONCESSIONARIA, C.NOM_CONCESSIONARIA, C.NUM_CNPJ, C.DSC_RAZAO_SOCIAL, C.END_CONCESSIONARIA, C.NOM_CONTATO, C.NUM_TELEFONE_CONTATO FROM ACME9.CONCESSIONARIA C WHERE C.SEQ_CONCESSIONARIA = " + SEQ_CONCESSIONARIA;
+            String sql = "SELECT C.SEQ_CONCESSIONARIA, C.NOM_CONCESSIONARIA, C.NUM_CNPJ, C.DSC_RAZAO_SOCIAL, C.END_CONCESSIONARIA, C.NOM_CONTATO, C.NUM_TELEFONE_CONTATO FROM SGA.CONCESSIONARIA C WHERE C.SEQ_CONCESSIONARIA = " + SEQ_CONCESSIONARIA;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -42,7 +39,7 @@ public class ConcessionariaDAO {
         ArrayList<Concessionaria> lstC = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT C.SEQ_CONCESSIONARIA, C.NOM_CONCESSIONARIA, C.NUM_CNPJ, C.DSC_RAZAO_SOCIAL, C.END_CONCESSIONARIA, C.NOM_CONTATO, C.NUM_TELEFONE_CONTATO FROM ACME9.CONCESSIONARIA C";
+            String sql = "SELECT C.SEQ_CONCESSIONARIA, C.NOM_CONCESSIONARIA, C.NUM_CNPJ, C.DSC_RAZAO_SOCIAL, C.END_CONCESSIONARIA, C.NOM_CONTATO, C.NUM_TELEFONE_CONTATO FROM SGA.CONCESSIONARIA C";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -71,7 +68,7 @@ public class ConcessionariaDAO {
         ArrayList<Concessionaria> lstC = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT C.SEQ_CONCESSIONARIA, C.NOM_CONCESSIONARIA, C.NUM_CNPJ, C.DSC_RAZAO_SOCIAL, C.END_CONCESSIONARIA, C.NOM_CONTATO, C.NUM_TELEFONE_CONTATO FROM ACME9.CONCESSIONARIA C WHERE C.SEQ_CONCESSIONARIA = " + SEQ_CONCESSIONARIA;
+            String sql = "SELECT C.SEQ_CONCESSIONARIA, C.NOM_CONCESSIONARIA, C.NUM_CNPJ, C.DSC_RAZAO_SOCIAL, C.END_CONCESSIONARIA, C.NOM_CONTATO, C.NUM_TELEFONE_CONTATO FROM SGA.CONCESSIONARIA C WHERE C.SEQ_CONCESSIONARIA = " + SEQ_CONCESSIONARIA;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -102,9 +99,9 @@ public class ConcessionariaDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_CONCESSIONARIA.sp_inc_concessionaria(?, ?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_inc_concessionaria(?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, C.getNOM_CONCESSIONARIA());
             cst.setString(2, C.getNUM_CNPJ());
             cst.setString(3, C.getDSC_RAZAO_SOCIAL());
@@ -117,7 +114,7 @@ public class ConcessionariaDAO {
             if (r > 0) {
                 id = cst.getInt(7);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -126,7 +123,7 @@ public class ConcessionariaDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -138,9 +135,9 @@ public class ConcessionariaDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_CONCESSIONARIA.sp_alt_concessionaria(?, ?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_alt_concessionaria(?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, C.getNOM_CONCESSIONARIA());
             cst.setString(2, C.getNUM_CNPJ());
             cst.setString(3, C.getDSC_RAZAO_SOCIAL());
@@ -153,7 +150,7 @@ public class ConcessionariaDAO {
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -162,7 +159,7 @@ public class ConcessionariaDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -174,16 +171,16 @@ public class ConcessionariaDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_FORNECEDOR.sp_del_fornecedor(?)}");
+            cst = cn.prepareCall("{call SGA.sp_del_fornecedor(?)}");
             cst.setInt(1, SEQ_CONCESSIONARIA);
 
             int r = cst.executeUpdate();
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -192,7 +189,7 @@ public class ConcessionariaDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -201,7 +198,7 @@ public class ConcessionariaDAO {
         int Seq = 0;
         try {
             objConn.Connect();
-            String sql = "SELECT C.SEQ_CONCESSIONARIA FROM ACME9.CONCESSIONARIA C WHERE C.NOM_CONCESSIONARIA = '" + NOM_CONCESSIONARIA + "'";
+            String sql = "SELECT C.SEQ_CONCESSIONARIA FROM SGA.CONCESSIONARIA C WHERE C.NOM_CONCESSIONARIA = '" + NOM_CONCESSIONARIA + "'";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 

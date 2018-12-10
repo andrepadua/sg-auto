@@ -10,15 +10,8 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-/**
- *
- * @author andreferreira
- */
 public class frmLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmConn
-     */
     public frmLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -29,8 +22,6 @@ public class frmLogin extends javax.swing.JFrame {
 
     public static String username;
     public static String password;
-    public static String server;
-    public static String sid;
     public static String msg;
     public static int PerfUsu;
 

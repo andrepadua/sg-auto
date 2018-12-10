@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package RPTFORM;
 
+import BEAN.appBean;
 import BUS.AcessorioBUS;
 import FORM.frmLogin;
 import MODELS.Acessorio;
@@ -67,7 +63,7 @@ public class FrmRptAcessorio extends javax.swing.JInternalFrame {
                 });
             }
             tblResult.setModel(dtm);
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
@@ -75,6 +71,7 @@ public class FrmRptAcessorio extends javax.swing.JInternalFrame {
     public static Connection establishConnection() throws ClassNotFoundException, SQLException {
         Connection connection = null;
         try {
+            appBean ab = new appBean();
             Class.forName("oracle.jdbc.driver.OracleDriver");
             String oracleURL = "jdbc:oracle:thin:@" + frmLogin.server + ":1521:" + frmLogin.sid;
             connection = DriverManager.getConnection(oracleURL, frmLogin.username, frmLogin.password);

@@ -1,7 +1,7 @@
 package DAO;
 
+import BEAN.appBean;
 import Class.ClsConn;
-import FORM.frmLogin;
 import MODELS.Fornecedor;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -11,19 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Thiago Xavier
- */
 public class FornecedorDAO {
-    
-        ClsConn objConn = new ClsConn();
+
+    ClsConn objConn = new ClsConn();
+    appBean ab = new appBean();
 
     public Fornecedor Consultar(int SEQ_FORNECEDOR) throws ClassNotFoundException {
         Fornecedor F = null;
         try {
             objConn.Connect();
-            String sql = "SELECT F.SEQ_FORNECEDOR, F.NOM_FORNECEDOR, F.NOM_FANTASIA, F.NUM_CNPJ, F.DSC_RAZAO_SOCIAL, F.END_FORNECEDOR, F.NOM_CONTATO, F.NUM_TELEFONE_CONTATO FROM ACME9.FORNECEDOR F WHERE F.SEQ_FORNECEDOR = " + SEQ_FORNECEDOR;
+            String sql = "SELECT F.SEQ_FORNECEDOR, F.NOM_FORNECEDOR, F.NOM_FANTASIA, F.NUM_CNPJ, F.DSC_RAZAO_SOCIAL, F.END_FORNECEDOR, F.NOM_CONTATO, F.NUM_TELEFONE_CONTATO FROM SGA.FORNECEDOR F WHERE F.SEQ_FORNECEDOR = " + SEQ_FORNECEDOR;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -42,7 +39,7 @@ public class FornecedorDAO {
         ArrayList<Fornecedor> lstTv = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT F.SEQ_FORNECEDOR, F.NOM_FORNECEDOR, F.NOM_FANTASIA, F.NUM_CNPJ, F.DSC_RAZAO_SOCIAL, F.END_FORNECEDOR, F.NOM_CONTATO, F.NUM_TELEFONE_CONTATO FROM ACME9.FORNECEDOR F";
+            String sql = "SELECT F.SEQ_FORNECEDOR, F.NOM_FORNECEDOR, F.NOM_FANTASIA, F.NUM_CNPJ, F.DSC_RAZAO_SOCIAL, F.END_FORNECEDOR, F.NOM_CONTATO, F.NUM_TELEFONE_CONTATO FROM SGA.FORNECEDOR F";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -72,7 +69,7 @@ public class FornecedorDAO {
         ArrayList<Fornecedor> lstTv = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT F.SEQ_FORNECEDOR, F.NOM_FORNECEDOR, F.NOM_FANTASIA, F.NUM_CNPJ, F.DSC_RAZAO_SOCIAL, F.END_FORNECEDOR, F.NOM_CONTATO, F.NUM_TELEFONE_CONTATO FROM ACME9.FORNECEDOR F WHERE F.SEQ_FORNECEDOR = " + SEQ_FORNECEDOR;
+            String sql = "SELECT F.SEQ_FORNECEDOR, F.NOM_FORNECEDOR, F.NOM_FANTASIA, F.NUM_CNPJ, F.DSC_RAZAO_SOCIAL, F.END_FORNECEDOR, F.NOM_CONTATO, F.NUM_TELEFONE_CONTATO FROM SGA.FORNECEDOR F WHERE F.SEQ_FORNECEDOR = " + SEQ_FORNECEDOR;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -97,16 +94,16 @@ public class FornecedorDAO {
         }
         return lstTv;
     }
-    
+
     public int Incluir(Fornecedor F) {
         Connection cn = null;
         CallableStatement cst = null;
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_FORNECEDOR.sp_inc_fornecedor(?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_inc_fornecedor(?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, F.getNOM_FORNECEDOR());
             cst.setString(2, F.getNOM_FANTASIA());
             cst.setString(3, F.getNUM_CNPJ());
@@ -120,7 +117,7 @@ public class FornecedorDAO {
             if (r > 0) {
                 id = cst.getInt(8);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -129,7 +126,7 @@ public class FornecedorDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -141,9 +138,9 @@ public class FornecedorDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_FORNECEDOR.sp_alt_fornecedor(?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_alt_fornecedor(?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, F.getNOM_FORNECEDOR());
             cst.setString(2, F.getNOM_FANTASIA());
             cst.setString(3, F.getNUM_CNPJ());
@@ -157,7 +154,7 @@ public class FornecedorDAO {
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -166,7 +163,7 @@ public class FornecedorDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -178,16 +175,16 @@ public class FornecedorDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_FORNECEDOR.sp_del_fornecedor(?)}");
+            cst = cn.prepareCall("{call SGA.sp_del_fornecedor(?)}");
             cst.setInt(1, SEQ_FORNECEDOR);
 
             int r = cst.executeUpdate();
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -196,16 +193,17 @@ public class FornecedorDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
     }
+
     public int ConsultarSeq(String NOM_FORNECEDOR) throws ClassNotFoundException {
         int Seq = 0;
         try {
             objConn.Connect();
-            String sql = "SELECT F.SEQ_FORNECEDOR FROM ACME9.FORNECEDOR F WHERE F.NOM_FORNECEDOR = '" + NOM_FORNECEDOR + "'";
+            String sql = "SELECT F.SEQ_FORNECEDOR FROM SGA.FORNECEDOR F WHERE F.NOM_FORNECEDOR = '" + NOM_FORNECEDOR + "'";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 

@@ -1,7 +1,7 @@
 package DAO;
 
+import BEAN.appBean;
 import Class.ClsConn;
-import FORM.frmLogin;
 import MODELS.Veiculo;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -14,12 +14,13 @@ import java.util.ArrayList;
 public class VeiculoDAO {
 
     ClsConn objConn = new ClsConn();
-
+    appBean ab = new appBean();
+    
     public Veiculo Consultar(int SEQ_VEICULO) throws ClassNotFoundException {
         Veiculo V = null;
         try {
             objConn.Connect();
-            String sql = "SELECT V.SEQ_VEICULO, V.NOM_VEICULO, TV.SEQ_TIPOVEICULO, C.SEQ_CONCESSIONARIA, TV.NOM_TIPOVEICULO, C.NOM_CONCESSIONARIA FROM ACME9.VEICULO V INNER JOIN ACME9.TIPOVEICULO TV ON (TV.SEQ_TIPOVEICULO = V.SEQ_TIPOVEICULO) INNER JOIN ACME9.CONCESSIONARIA C ON (C.SEQ_CONCESSIONARIA = V.SEQ_CONCESSIONARIA) WHERE V.SEQ_VEICULO = " + SEQ_VEICULO;
+            String sql = "SELECT V.SEQ_VEICULO, V.NOM_VEICULO, TV.SEQ_TIPOVEICULO, C.SEQ_CONCESSIONARIA, TV.NOM_TIPOVEICULO, C.NOM_CONCESSIONARIA FROM SGA.VEICULO V INNER JOIN SGA.TIPOVEICULO TV ON (TV.SEQ_TIPOVEICULO = V.SEQ_TIPOVEICULO) INNER JOIN SGA.CONCESSIONARIA C ON (C.SEQ_CONCESSIONARIA = V.SEQ_CONCESSIONARIA) WHERE V.SEQ_VEICULO = " + SEQ_VEICULO;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -46,7 +47,7 @@ public class VeiculoDAO {
         ArrayList<Veiculo> lstV = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT V.SEQ_VEICULO, V.NOM_VEICULO, NULL SEQ_TIPOVEICULO, NULL SEQ_CONCESSIONARIA, TV.NOM_TIPOVEICULO, C.NOM_CONCESSIONARIA FROM ACME9.VEICULO V INNER JOIN ACME9.TIPOVEICULO TV ON (TV.SEQ_TIPOVEICULO = V.SEQ_TIPOVEICULO) INNER JOIN ACME9.CONCESSIONARIA C ON (C.SEQ_CONCESSIONARIA = V.SEQ_CONCESSIONARIA)";
+            String sql = "SELECT V.SEQ_VEICULO, V.NOM_VEICULO, NULL SEQ_TIPOVEICULO, NULL SEQ_CONCESSIONARIA, TV.NOM_TIPOVEICULO, C.NOM_CONCESSIONARIA FROM SGA.VEICULO V INNER JOIN SGA.TIPOVEICULO TV ON (TV.SEQ_TIPOVEICULO = V.SEQ_TIPOVEICULO) INNER JOIN SGA.CONCESSIONARIA C ON (C.SEQ_CONCESSIONARIA = V.SEQ_CONCESSIONARIA)";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -72,7 +73,7 @@ public class VeiculoDAO {
         ArrayList<Veiculo> lstV = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT V.SEQ_VEICULO, V.NOM_VEICULO, TV.SEQ_TIPOVEICULO, C.SEQ_CONCESSIONARIA, TV.NOM_TIPOVEICULO, C.NOM_CONCESSIONARIA FROM ACME9.VEICULO V INNER JOIN ACME9.TIPOVEICULO TV ON (TV.SEQ_TIPOVEICULO = V.SEQ_TIPOVEICULO) INNER JOIN ACME9.CONCESSIONARIA C ON (C.SEQ_CONCESSIONARIA = V.SEQ_CONCESSIONARIA) WHERE V.SEQ_VEICULO = " + SEQ_VEICULO;
+            String sql = "SELECT V.SEQ_VEICULO, V.NOM_VEICULO, TV.SEQ_TIPOVEICULO, C.SEQ_CONCESSIONARIA, TV.NOM_TIPOVEICULO, C.NOM_CONCESSIONARIA FROM SGA.VEICULO V INNER JOIN SGA.TIPOVEICULO TV ON (TV.SEQ_TIPOVEICULO = V.SEQ_TIPOVEICULO) INNER JOIN SGA.CONCESSIONARIA C ON (C.SEQ_CONCESSIONARIA = V.SEQ_CONCESSIONARIA) WHERE V.SEQ_VEICULO = " + SEQ_VEICULO;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -100,9 +101,9 @@ public class VeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_VEICULO.sp_inc_veiculo(?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.PKG_VEICULO.sp_inc_veiculo(?, ?, ?, ?)}");
             cst.setString(1, V.getNOM_VEICULO());
             cst.setInt(2, V.getSEQ_TIPOVEICULO());
             cst.setInt(3, V.getSEQ_CONCESSIONARIA());
@@ -112,7 +113,7 @@ public class VeiculoDAO {
             if (r > 0) {
                 id = cst.getInt(4);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -121,7 +122,7 @@ public class VeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -133,9 +134,9 @@ public class VeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_VEICULO.sp_alt_veiculo(?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_alt_veiculo(?, ?, ?, ?)}");
             cst.setString(1, V.getNOM_VEICULO());
             cst.setInt(2, V.getSEQ_TIPOVEICULO());
             cst.setInt(3, V.getSEQ_CONCESSIONARIA());
@@ -145,7 +146,7 @@ public class VeiculoDAO {
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -154,7 +155,7 @@ public class VeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -166,16 +167,16 @@ public class VeiculoDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_VEICULO.sp_del_veiculo(?)}");
+            cst = cn.prepareCall("{call SGA.sp_del_veiculo(?)}");
             cst.setInt(1, SEQ_VEICULO);
 
             int r = cst.executeUpdate();
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -184,7 +185,7 @@ public class VeiculoDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -193,7 +194,7 @@ public class VeiculoDAO {
         String Nome = null;
         try {
             objConn.Connect();
-            String sql = "SELECT V.NOM_VEICULO FROM ACME9.VEICULO V WHERE V.SEQ_VEICULO = " + SEQ_VEICULO;
+            String sql = "SELECT V.NOM_VEICULO FROM SGA.VEICULO V WHERE V.SEQ_VEICULO = " + SEQ_VEICULO;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 

@@ -1,7 +1,7 @@
 package DAO;
 
+import BEAN.appBean;
 import Class.ClsConn;
-import FORM.frmLogin;
 import MODELS.Peca;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -11,19 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Thiago Xavier
- */
 public class PecaDAO {
-    
-        ClsConn objConn = new ClsConn();
+
+    ClsConn objConn = new ClsConn();
+    appBean ab = new appBean();
 
     public Peca Consultar(int SEQ_PECA) throws ClassNotFoundException {
         Peca pc = null;
         try {
             objConn.Connect();
-            String sql = "SELECT P.SEQ_PECA, P.NOM_PECA, NULL SEQ_FORNECEDOR, NULL FLG_PROD_MONT, F.NOM_FORNECEDOR, DECODE(P.FLG_PROD_MONT, 1, 'Sim', 0, 'Não') PROD_MONTADORA FROM ACME9.PECA P INNER JOIN ACME9.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR) WHERE P.SEQ_PECA = " + SEQ_PECA;
+            String sql = "SELECT P.SEQ_PECA, P.NOM_PECA, NULL SEQ_FORNECEDOR, NULL FLG_PROD_MONT, F.NOM_FORNECEDOR, DECODE(P.FLG_PROD_MONT, 1, 'Sim', 0, 'Não') PROD_MONTADORA FROM SGA.PECA P INNER JOIN SGA.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR) WHERE P.SEQ_PECA = " + SEQ_PECA;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -42,7 +39,7 @@ public class PecaDAO {
         ArrayList<Peca> lstP = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT P.SEQ_PECA, P.NOM_PECA, NULL SEQ_FORNECEDOR, NULL FLG_PROD_MONT, F.NOM_FORNECEDOR, DECODE(P.FLG_PROD_MONT, 1, 'Sim', 0, 'Não') PROD_MONTADORA FROM ACME9.PECA P INNER JOIN ACME9.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR)";
+            String sql = "SELECT P.SEQ_PECA, P.NOM_PECA, NULL SEQ_FORNECEDOR, NULL FLG_PROD_MONT, F.NOM_FORNECEDOR, DECODE(P.FLG_PROD_MONT, 1, 'Sim', 0, 'Não') PROD_MONTADORA FROM SGA.PECA P INNER JOIN SGA.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR)";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -68,7 +65,7 @@ public class PecaDAO {
         ArrayList<Peca> lstP = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT P.SEQ_PECA, P.NOM_PECA, NULL SEQ_FORNECEDOR, NULL FLG_PROD_MONT, F.NOM_FORNECEDOR, DECODE(P.FLG_PROD_MONT, 1, 'Sim', 0, 'Não') PROD_MONTADORA FROM ACME9.PECA P INNER JOIN ACME9.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR) WHERE P.SEQ_PECA = " + SEQ_PECA;
+            String sql = "SELECT P.SEQ_PECA, P.NOM_PECA, NULL SEQ_FORNECEDOR, NULL FLG_PROD_MONT, F.NOM_FORNECEDOR, DECODE(P.FLG_PROD_MONT, 1, 'Sim', 0, 'Não') PROD_MONTADORA FROM SGA.PECA P INNER JOIN SGA.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR) WHERE P.SEQ_PECA = " + SEQ_PECA;
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
@@ -89,16 +86,16 @@ public class PecaDAO {
         }
         return lstP;
     }
-    
+
     public int Incluir(Peca pc) {
         Connection cn = null;
         CallableStatement cst = null;
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_PECA.sp_inc_peca(?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_inc_peca(?, ?, ?, ?)}");
             cst.setString(1, pc.getNOM_PECA());
             cst.setInt(2, pc.getSEQ_FORNECEDOR());
             cst.setInt(3, pc.getFLG_PROD_MONT());
@@ -108,7 +105,7 @@ public class PecaDAO {
             if (r > 0) {
                 id = cst.getInt(4);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -117,7 +114,7 @@ public class PecaDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -129,9 +126,9 @@ public class PecaDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_PECA.sp_alt_peca(?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call SGA.sp_alt_peca(?, ?, ?, ?)}");
             cst.setString(1, pc.getNOM_PECA());
             cst.setInt(2, pc.getSEQ_FORNECEDOR());
             cst.setInt(3, pc.getFLG_PROD_MONT());
@@ -141,7 +138,7 @@ public class PecaDAO {
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -150,7 +147,7 @@ public class PecaDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
@@ -162,16 +159,16 @@ public class PecaDAO {
         int id = 0;
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/Guaruenglish?user=crawdio&password=crawdio");
+            cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call ACME9.PKG_PECA.sp_del_peca(?)}");
+            cst = cn.prepareCall("{call SGA.sp_del_peca(?)}");
             cst.setInt(1, SEQ_PECA);
 
             int r = cst.executeUpdate();
             if (r > 0) {
                 id++;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         } finally {
             try {
                 if (cst != null) {
@@ -180,16 +177,17 @@ public class PecaDAO {
                 if (cn != null) {
                     cn.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
             }
         }
         return id;
     }
+
     public int ConsultarSeq(String NOM_PECA) throws ClassNotFoundException {
         int Seq = 0;
         try {
             objConn.Connect();
-            String sql = "SELECT P.SEQ_PECA FROM ACME9.PECA P WHERE P.NOM_PECA = '" + NOM_PECA + "'";
+            String sql = "SELECT P.SEQ_PECA FROM SGA.PECA P WHERE P.NOM_PECA = '" + NOM_PECA + "'";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
