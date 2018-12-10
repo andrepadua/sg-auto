@@ -2,7 +2,6 @@ package RPTFORM;
 
 import BEAN.appBean;
 import BUS.VeiculoBUS;
-import FORM.frmLogin;
 import MODELS.Veiculo;
 import java.sql.Connection;
 import java.sql.DriverManager;

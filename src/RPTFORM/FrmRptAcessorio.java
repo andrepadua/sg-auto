@@ -2,7 +2,6 @@ package RPTFORM;
 
 import BEAN.appBean;
 import BUS.AcessorioBUS;
-import FORM.frmLogin;
 import MODELS.Acessorio;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,7 +33,7 @@ public class FrmRptAcessorio extends javax.swing.JInternalFrame {
     }
 
     AcessorioBUS aBus = new AcessorioBUS();
-    
+
     private void PreencherTabela()
             throws Exception {
         DefaultTableModel dtm = new DefaultTableModel();
@@ -59,7 +58,7 @@ public class FrmRptAcessorio extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
-    
+
     public static Connection establishConnection() throws ClassNotFoundException, SQLException {
         Connection connection = null;
         try {
@@ -71,34 +70,40 @@ public class FrmRptAcessorio extends javax.swing.JInternalFrame {
         }
         return connection;
     }
-    
+
     public void gerar(String layout) throws JRException, SQLException, ClassNotFoundException {
-        //gerando o jasper design
-        JasperDesign desenho = JRXmlLoader.load(layout);
 
-        //compila o relatório
-        JasperReport relatorio = JasperCompileManager.compileReport(desenho);
+        try {
+            //gerando o jasper design
+            JasperDesign desenho = JRXmlLoader.load(layout);
 
-        //estabelece conexão
-        Connection connection = establishConnection();
-        Statement stm = connection.createStatement();
-        String query = "SELECT A.SEQ_ACESSORIO, A.NOM_ACESSORIO, A.VAL_ACESSORIO, M.DSC_MOTORIZACAO, F.NOM_FORNECEDOR FROM SGA.ACESSORIO A INNER JOIN SGA.MOTORIZACAO M ON (M.SEQ_MOTORIZACAO = A.SEQ_MOTORIZACAO) INNER JOIN SGA.FORNECEDOR F ON (F.SEQ_FORNECEDOR = A.SEQ_FORNECEDOR)";
-        ResultSet rs = stm.executeQuery(query);
+            //compila o relatório
+            JasperReport relatorio = JasperCompileManager.compileReport(desenho);
 
-        //implementação da interface JRDataSource para DataSource ResultSet
-        JRResultSetDataSource jrRS = new JRResultSetDataSource(rs);
+            //estabelece conexão
+            Connection connection = establishConnection();
+            Statement stm = connection.createStatement();
+            String query = "SELECT A.SEQ_ACESSORIO, A.NOM_ACESSORIO, A.VAL_ACESSORIO, M.DSC_MOTORIZACAO, F.NOM_FORNECEDOR FROM SGA.ACESSORIO A INNER JOIN SGA.MOTORIZACAO M ON (M.SEQ_MOTORIZACAO = A.SEQ_MOTORIZACAO) INNER JOIN SGA.FORNECEDOR F ON (F.SEQ_FORNECEDOR = A.SEQ_FORNECEDOR)";
+            ResultSet rs = stm.executeQuery(query);
 
-        //executa o relatório
-        Map parametros = new HashMap();
-        parametros.put("PAR1", "Teste de Parâmetro");
-        JasperPrint impressao = JasperFillManager.fillReport(relatorio, parametros, jrRS);
+            //implementação da interface JRDataSource para DataSource ResultSet
+            JRResultSetDataSource jrRS = new JRResultSetDataSource(rs);
 
-        //exibe o resultado
-        JasperViewer viewer = new JasperViewer(impressao, false);
-        viewer.setTitle(title);
-        viewer.show();
+            //executa o relatório
+            Map parametros = new HashMap();
+            parametros.put("PAR1", "Teste de Parâmetro");
+            JasperPrint impressao = JasperFillManager.fillReport(relatorio, parametros, jrRS);
+
+            //exibe o resultado
+            JasperViewer viewer = new JasperViewer(impressao, false);
+            viewer.setTitle(title);
+            viewer.show();
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -180,7 +185,7 @@ public class FrmRptAcessorio extends javax.swing.JInternalFrame {
             gerar("C:\\sg-auto\\src\\REPORTS\\RptAcessorio.jrxml");
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-        } catch (JRException | SQLException ex) {
+        } catch (SQLException | JRException ex) {
             Logger.getLogger(FrmRptAcessorio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnPrintActionPerformed

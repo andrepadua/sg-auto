@@ -88,7 +88,7 @@ public class FrmRptPeca extends javax.swing.JInternalFrame {
         //estabelece conexão
         Connection connection = establishConnection();
         Statement stm = connection.createStatement();
-        String query = "SELECT P.SEQ_PECA, P.NOM_PECA, F.NOM_FORNECEDOR, DECODE(P.FLG_PROD_MONT, 1, 'Sim', 0, 'Não') PROD_MONTADORA FROM SGA.PECA P INNER JOIN SGA.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR)";
+        String query = "SELECT P.SEQ_PECA, P.NOM_PECA, F.NOM_FORNECEDOR, CASE P.FLG_PROD_MONT WHEN 1 THEN 'Sim' WHEN 0 THEN 'Não' END PROD_MONTADORA FROM SGA.PECA P INNER JOIN SGA.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR)";
         ResultSet rs = stm.executeQuery(query);
 
         //implementação da interface JRDataSource para DataSource ResultSet

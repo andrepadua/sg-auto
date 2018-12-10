@@ -39,7 +39,7 @@ public class PecaDAO {
         ArrayList<Peca> lstP = new ArrayList<>();
         try {
             objConn.Connect();
-            String sql = "SELECT P.SEQ_PECA, P.NOM_PECA, NULL SEQ_FORNECEDOR, NULL FLG_PROD_MONT, F.NOM_FORNECEDOR, DECODE(P.FLG_PROD_MONT, 1, 'Sim', 0, 'Não') PROD_MONTADORA FROM SGA.PECA P INNER JOIN SGA.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR)";
+            String sql = "SELECT P.SEQ_PECA, P.NOM_PECA, F.NOM_FORNECEDOR, CASE P.FLG_PROD_MONT WHEN 1 THEN 'Sim' WHEN 0 THEN 'Não' END PROD_MONTADORA FROM SGA.PECA P INNER JOIN SGA.FORNECEDOR F ON (P.SEQ_FORNECEDOR = F.SEQ_FORNECEDOR)";
             PreparedStatement stm = objConn.con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
 
