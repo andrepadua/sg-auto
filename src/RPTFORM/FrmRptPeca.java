@@ -5,6 +5,7 @@
  */
 package RPTFORM;
 
+import BEAN.appBean;
 import BUS.FornecedorBUS;
 import BUS.PecaBUS;
 import FORM.frmLogin;
@@ -67,7 +68,7 @@ public class FrmRptPeca extends javax.swing.JInternalFrame {
                 });
             }
             tblResult.setModel(dtm);
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
@@ -75,9 +76,9 @@ public class FrmRptPeca extends javax.swing.JInternalFrame {
     public static Connection establishConnection() throws ClassNotFoundException, SQLException {
         Connection connection = null;
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            String oracleURL = "jdbc:oracle:thin:@" + frmLogin.server + ":1521:" + frmLogin.sid;
-            connection = DriverManager.getConnection(oracleURL, frmLogin.username, frmLogin.password);
+            appBean ab = new appBean();
+            Class.forName(ab.getClassforname());
+            connection = DriverManager.getConnection(ab.getUrl(), ab.getUsername(), ab.getPassword());
             connection.setAutoCommit(false);
         } catch (SQLException exception) {
         }

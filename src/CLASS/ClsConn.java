@@ -1,19 +1,20 @@
 package Class;
 
+import BEAN.appBean;
 import java.sql.*;
 
 public class ClsConn {
 
     private String messageException;
     public Connection con = null;
+    appBean ab = new appBean();
 
     public void Connect() throws SQLException, ClassNotFoundException {
-        String url = "jdbc:mysql://localhost/sga?user=sga&password=sga";
-                                           
+                                                   
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(ab.getClassforname());
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            con = DriverManager.getConnection(url, "crawdio", "crawdio");
+            con = DriverManager.getConnection(ab.getUrl(), ab.getUsername(), ab.getPassword());
             this.messageException = "OK";
         } catch (SQLException ex) {
             this.messageException = ex.getMessage();

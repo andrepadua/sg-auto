@@ -67,7 +67,7 @@ public class TipoVeiculoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_inc_tipoveiculo(?, ?)}");
+            cst = cn.prepareCall("{call sp_inc_tipoveiculo(?, ?)}");
             cst.setString(1, tv.getNOM_TIPOVEICULO());
             cst.registerOutParameter(2, java.sql.Types.INTEGER);
 
@@ -98,7 +98,7 @@ public class TipoVeiculoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_alt_tipoveiculo(?, ?)}");
+            cst = cn.prepareCall("{call sp_alt_tipoveiculo(?, ?)}");
             cst.setString(1, tv.getNOM_TIPOVEICULO());
             cst.setInt(2, tv.getSEQ_TIPOVEICULO());
 
@@ -129,7 +129,7 @@ public class TipoVeiculoDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_del_tipoveiculo(?)}");
+            cst = cn.prepareCall("{call sp_del_tipoveiculo(?)}");
             cst.setInt(1, SEQ_TIPOVEICULO);
 
             int r = cst.executeUpdate();

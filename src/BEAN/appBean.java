@@ -10,6 +10,7 @@ public final class appBean {
     private String username;
     private String password;
     private String url;
+    private String classforname;
 
     public appBean() {
         this.setTitulo("SGA");
@@ -19,9 +20,8 @@ public final class appBean {
 
         this.setUsername("sga");
         this.setPassword("sga");
-        //this.server = "192.168.0.7";
-        //this.sid = "SAAED";
 
+        this.setClassforname("com.mysql.jdbc.Driver");
         this.setUrl("jdbc:mysql://localhost/sga?user=sga&password=sga");
     }
 
@@ -85,5 +85,19 @@ public final class appBean {
      */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    /**
+     * @return the classforname
+     */
+    public String getClassforname() {
+        return classforname;
+    }
+
+    /**
+     * @param classforname the classforname to set
+     */
+    public void setClassforname(String classforname) {
+        this.classforname = classforname;
     }
 }

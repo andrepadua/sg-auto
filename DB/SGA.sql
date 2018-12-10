@@ -3,23 +3,23 @@ CREATE SCHEMA IF NOT EXISTS SGA DEFAULT CHARACTER SET utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.ACESSORIO 
 (
-  SEQ_ACESSORIO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
-, NOM_ACESSORIO VARCHAR(50) NOT NULL COMMENT 'Nome do Acess√≥rio' 
-, VAL_ACESSORIO DECIMAL(14, 2) NOT NULL COMMENT 'Valor do ve√≠culo'
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp' 
+  SEQ_ACESSORIO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
+, NOM_ACESSORIO VARCHAR(50) NOT NULL COMMENT 'Nome do AcessÛrio' 
+, VAL_ACESSORIO DECIMAL(14, 2) NOT NULL 
+, USUARIO VARCHAR(30) COMMENT 'Usu·rio de TimeStamp' 
 , DAT_USUARIO DATETIME COMMENT 'Data de TimeStamp' 
-, SEQ_MOTORIZACAO INT(11) NOT NULL COMMENT 'Relacionamento com a tabela MOTORIZACAO'
-, SEQ_FORNECEDOR INT(11) NOT NULL COMMENT 'Relacionamento com a tabela Fornecedor'
+, SEQ_MOTORIZACAO INT(11) NOT NULL 
+, SEQ_FORNECEDOR INT(11) NOT NULL 
 , PRIMARY KEY (SEQ_ACESSORIO))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.ACESSORIOVEICULO 
 (
-  SEQ_ACESSORIOVEICULO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
+  SEQ_ACESSORIOVEICULO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
 , SEQ_ACESSORIO INT(11) NOT NULL COMMENT 'Relacionamento com ACESSORIO' 
 , SEQ_VEICULO INT(11) NOT NULL COMMENT 'Relacionamento com VEICULO' 
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp' 
+, USUARIO VARCHAR(30) COMMENT 'Usu·rio de TimeStamp' 
 , DAT_USUARIO DATETIME COMMENT 'Data de TimeStamp' 
 , PRIMARY KEY (SEQ_ACESSORIOVEICULO))
 ENGINE = InnoDB
@@ -27,30 +27,30 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.CONCESSIONARIA 
 (
-  SEQ_CONCESSIONARIA INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
-, NOM_CONCESSIONARIA VARCHAR(100) COMMENT 'Nome da Concession√°ria'
-, NUM_CNPJ VARCHAR(30) COMMENT 'N√∫mero do CNPJ'
-, DSC_RAZAO_SOCIAL VARCHAR(50) COMMENT 'Descri√ß√£o da Raz√£o Social'
-, END_CONCESSIONARIA VARCHAR(100) COMMENT 'Endere√ßo da Concession√°ria'
-, NOM_CONTATO VARCHAR(60) COMMENT 'Nome do Contato'
-, NUM_TELEFONE_CONTATO VARCHAR(30) COMMENT 'N√∫mero de Telefone do Contato'
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp'
-, DAT_USUARIO DATETIME COMMENT 'Data de TimeStamp'
+  SEQ_CONCESSIONARIA INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
+, NOM_CONCESSIONARIA VARCHAR(100) COMMENT 'Nome da Concession·ria'
+, NUM_CNPJ VARCHAR(30)  COMMENT 'N˙mero do CNPJ'
+, DSC_RAZAO_SOCIAL VARCHAR(50)  COMMENT 'DescriÁ„o da Raz„o Social'
+, END_CONCESSIONARIA VARCHAR(100)  COMMENT 'EndereÁo da Concession·ria'
+, NOM_CONTATO VARCHAR(60)  COMMENT 'Nome do Contato'
+, NUM_TELEFONE_CONTATO VARCHAR(30)  COMMENT 'N˙meor de Telefone'
+, USUARIO VARCHAR(30)  COMMENT 'Usu·rio de TimeStamp'
+, DAT_USUARIO DATETIME  COMMENT 'Data de TimeStamp'
 , PRIMARY KEY (SEQ_CONCESSIONARIA))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.FORNECEDOR 
 (
-  SEQ_FORNECEDOR INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
+  SEQ_FORNECEDOR INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
 , NOM_FORNECEDOR VARCHAR(100) COMMENT 'Nome do Fornecedor' 
 , NOM_FANTASIA VARCHAR(100) COMMENT 'Nome Fantasia' 
-, NUM_CNPJ VARCHAR(30) COMMENT 'N√∫mero do CNPJ' 
-, DSC_RAZAO_SOCIAL VARCHAR(50) COMMENT 'Descri√ß√£o da Raz√£o Social' 
-, END_FORNECEDOR VARCHAR(100) COMMENT 'Endere√ßo do Fornecedor' 
+, NUM_CNPJ VARCHAR(30) COMMENT 'N˙mero do CNPJ' 
+, DSC_RAZAO_SOCIAL VARCHAR(50) COMMENT 'DescriÁ„oo da Raz„o Social' 
+, END_FORNECEDOR VARCHAR(100) COMMENT 'EndereÁo do Fornecedor' 
 , NOM_CONTATO VARCHAR(60) COMMENT 'Nome do Contato' 
 , NUM_TELEFONE_CONTATO VARCHAR(30) COMMENT 'Telefone de Contato' 
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp' 
+, USUARIO VARCHAR(30) COMMENT 'Usu·rio de TimeStamp' 
 , DAT_USUARIO DATETIME COMMENT 'Data de TimeStamp' 
 , PRIMARY KEY (SEQ_FORNECEDOR))
 ENGINE = InnoDB
@@ -58,25 +58,25 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.MOTORIZACAO 
 (
-  SEQ_MOTORIZACAO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
-, DSC_MOTORIZACAO VARCHAR(50) NOT NULL COMMENT 'Descri√ß√£o Padr√£o da Motoriza√ß√£o'
-, NUM_POTENCIA INT(11) NOT NULL COMMENT 'Quantidade de Pot√™ncia (EM HP)' 
+  SEQ_MOTORIZACAO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
+, DSC_MOTORIZACAO VARCHAR(50) NOT NULL COMMENT 'DescriÁ„o Padr„o da MotorizaÁ„o'
+, NUM_POTENCIA INT(11) NOT NULL COMMENT 'Quantidade de PotÍncia (EM HP)' 
 , NUM_VELOCIDADE_FINAL DECIMAL(14, 2) NOT NULL COMMENT 'Valor da Velocidade Final (EM KM/H)' 
-, NUM_AUTONOMIA DECIMAL(14, 2) NOT NULL COMMENT 'Consumo em litros por tipo de combust√≠vel' 
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp' 
+, NUM_AUTONOMIA DECIMAL(14, 2) NOT NULL COMMENT 'Consumo em litros por tipo de combustÈvel' 
+, USUARIO VARCHAR(30) COMMENT 'Usu·rio de TimeStamp' 
 , DAT_USUARIO DATETIME COMMENT 'Data de TimeStamp' 
-, SEQ_TIPOMOTORIZACAO INT(11) NOT NULL COMMENT 'Relacionamento com a tabela TIPOMOTORIZACAO'
+, SEQ_TIPOMOTORIZACAO INT(11) NOT NULL 
 , PRIMARY KEY (SEQ_MOTORIZACAO))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.PECA 
 (
-  SEQ_PECA INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
-, NOM_PECA VARCHAR(50) COMMENT 'Nome da Pe√ßa' 
-, SEQ_FORNECEDOR INT(11) NOT NULL COMMENT 'Relacionamento com a tabela Fornecedor'
+  SEQ_PECA INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
+, NOM_PECA VARCHAR(50) COMMENT 'Nome da PeÁa' 
+, SEQ_FORNECEDOR INT(11) NOT NULL 
 , FLG_PROD_MONT TINYINT DEFAULT 0 NOT NULL COMMENT 'Flag de Produzido pela montadora' 
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp' 
+, USUARIO VARCHAR(30) COMMENT 'Usu·rio de TimeStamp' 
 , DAT_USUARIO DATETIME COMMENT 'Data de TimStamp' 
 , PRIMARY KEY (SEQ_PECA))
 ENGINE = InnoDB
@@ -84,10 +84,10 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.PECAVEICULO 
 (
-  SEQ_PECAVEICULO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
-, SEQ_PECA INT(11) NOT NULL COMMENT 'Relacionamento com a tabela PECA'
-, SEQ_VEICULO INT(11) NOT NULL COMMENT 'Relacionamento com a tabela VEICULO'
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp' 
+  SEQ_PECAVEICULO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
+, SEQ_PECA INT(11) NOT NULL COMMENT 'Relacionamento com a tabela SGA.PECA'
+, SEQ_VEICULO INT(11) NOT NULL COMMENT 'Relacionamento com a tabela SGA.VEICULO'
+, USUARIO VARCHAR(30) COMMENT 'Usu·rio de TimeStamp' 
 , DAT_USUARIO DATETIME COMMENT 'Data de TimeStamp' 
 , PRIMARY KEY (SEQ_PECAVEICULO))
 ENGINE = InnoDB
@@ -95,9 +95,9 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.TIPOMOTORIZACAO 
 (
-  SEQ_TIPOMOTORIZACAO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
-, DESC_TIPOMOTORIZACAO VARCHAR(50) COMMENT 'Descri√ß√£o do Tipo de Motoriza√ß√£o...' 
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp' 
+  SEQ_TIPOMOTORIZACAO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
+, DESC_TIPOMOTORIZACAO VARCHAR(50) COMMENT 'DescriÁ„o do Tipo de MotorizaÁ„o' 
+, USUARIO VARCHAR(30) COMMENT 'Usu·rio de TimeStamp' 
 , DAT_USUARIO DATETIME COMMENT 'Data de TimStamp' 
 , PRIMARY KEY (SEQ_TIPOMOTORIZACAO))
 ENGINE = InnoDB
@@ -105,9 +105,9 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.TIPOVEICULO 
 (
-  SEQ_TIPOVEICULO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
-, NOM_TIPOVEICULO VARCHAR(50) COMMENT 'Nome do Ve√≠culo' 
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp' 
+  SEQ_TIPOVEICULO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
+, NOM_TIPOVEICULO VARCHAR(50) COMMENT 'Nome do VeÌculo' 
+, USUARIO VARCHAR(30) COMMENT 'Usu·rio de TimeStamp' 
 , DAT_USUARIO DATETIME COMMENT 'Data de TimStamp' 
 , PRIMARY KEY (SEQ_TIPOVEICULO))
 ENGINE = InnoDB
@@ -115,9 +115,9 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.VEICULO 
 (
-  SEQ_VEICULO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
-, NOM_VEICULO VARCHAR(50) NOT NULL COMMENT 'Nome do Ve√≠culo' 
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp' 
+  SEQ_VEICULO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
+, NOM_VEICULO VARCHAR(50) NOT NULL COMMENT 'Nome do VeÌculo' 
+, USUARIO VARCHAR(30) COMMENT 'Usu·rio de TimeStamp' 
 , DAT_USUARIO DATETIME COMMENT 'Data de TimeStamp' 
 , SEQ_TIPOVEICULO INT(11) NOT NULL COMMENT 'Relacionamento com a Tabela SGA.TIPOVEICULO'
 , SEQ_CONCESSIONARIA INT(11) NOT NULL COMMENT 'Relacionamento com a Tabela SGA.CONCESSIONARIA'
@@ -127,9 +127,9 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.PERFIL 
 (
-  SEQ_PERFIL INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
+  SEQ_PERFIL INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
 , NOM_PERFIL VARCHAR(50) NOT NULL COMMENT 'Nome do Perfil'
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp' 
+, USUARIO VARCHAR(30) COMMENT 'Usu·rio de TimeStamp' 
 , DAT_USUARIO DATETIME COMMENT 'Data de TimeStamp' 
 , PRIMARY KEY (SEQ_PERFIL))
 ENGINE = InnoDB
@@ -137,12 +137,12 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS SGA.USUARIO 
 (
-  SEQ_USUARIO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim√°ria da Tabela' 
-, NOM_USUARIO VARCHAR(100) NOT NULL COMMENT 'Nome do Usu√°rio'
-, LOGINNAME VARCHAR(30) NOT NULL COMMENT 'LOGINNAME do Usu√°rio'
-, USUARIO VARCHAR(30) COMMENT 'Usu√°rio de TimeStamp' 
+  SEQ_USUARIO INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave Prim·ria da Tabela' 
+, NOM_USUARIO VARCHAR(100) NOT NULL COMMENT 'Nome do Usu·rio'
+, LOGINNAME VARCHAR(30) NOT NULL COMMENT 'LOGINNAME do Usu·rio'
+, USUARIO VARCHAR(30) COMMENT 'Usu·rio de TimeStamp' 
 , DAT_USUARIO DATETIME COMMENT 'Data de TimeStamp' 
-, SEQ_PERFIL INT(11) NOT NULL COMMENT 'Relacionamento com a Tabela Perfil'
+, SEQ_PERFIL INT(11) NOT NULL COMMENT 'Relacionamento com a Tabela SGA.PERFIL'
 , PRIMARY KEY (SEQ_USUARIO))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -162,16 +162,19 @@ ALTER TABLE SGA.VEICULO ADD CONSTRAINT VEICULO_CONCESSIONARIA_FK FOREIGN KEY (SE
 ALTER TABLE SGA.VEICULO ADD CONSTRAINT VEICULO_TIPOVEICULO_FK FOREIGN KEY (SEQ_TIPOVEICULO) REFERENCES SGA.TIPOVEICULO (SEQ_TIPOVEICULO);
 ALTER TABLE SGA.USUARIO ADD CONSTRAINT USUARIO_PERFIL_FK FOREIGN KEY (SEQ_PERFIL) REFERENCES PERFIL (SEQ_PERFIL) ;
 
-ALTER TABLE SGA.ACESSORIO COMMENT 'Para cada modelo, h√° diversos tipos de configura√ß√µes poss√≠veis e exclusivas para cada modelo, sendo cada configura√ß√£o √© formada por v√°rios tipos de acess√≥rios e motoriza√ß√£o. ';
-ALTER TABLE SGA.ACESSORIOVEICULO COMMENT 'Cada tipo de acess√≥rio e caracterizado por um c√≥digo, nome e custo, e diferenciado para cada modelo de carro.';
-ALTER TABLE SGA.CONCESSIONARIA COMMENT 'A fabrica s√≥ vendem seus ve√≠culos para a rede de concession√°rias associada √† marca, n√£o vendendo diretamente para o usu√°rio final, por isso √© necess√°rio saber, a Raz√£o social, CNPJ, endere√ßos, telefones, e os nomes de contato das diversas redes de concession√°rias.';
-ALTER TABLE SGA.FORNECEDOR COMMENT 'Os fabricantes de pe√ßas s√≥ produzem pe√ßas e os de acess√≥rios s√≥ produzem acess√≥rios. As informa√ß√µes relevantes de fornecedores s√£o: Raz√£o social, CNPJ, endere√ßo, telefones e nome de contato.';
-ALTER TABLE SGA.MOTORIZACAO COMMENT 'As informa√ß√µes relevantes para a motoriza√ß√£o s√£o:  Potencia em HP, velocidade final, autonomia (consumo em litros por tipo de combust√≠vel).';
-ALTER TABLE SGA.PECA COMMENT 'Muitas das pe√ßas que comp√µem os carros s√£o produzidas por uma rede de fabricantes de pe√ßas sendo que para cada tipo de pe√ßa pode ser fornecida por mais de um fornecedor.';
-ALTER TABLE SGA.PECAVEICULO COMMENT 'Muitas das pe√ßas que comp√µem os carros s√£o produzidas por uma rede de fabricantes de pe√ßas sendo que para cada tipo de pe√ßa pode ser fornecida por mais de um fornecedor.';
-ALTER TABLE SGA.VEICULO COMMENT 'A ACME montadora de carros produz v√°rios modelos de carros de passeio e de transporte leve.';
+ALTER TABLE SGA.ACESSORIO COMMENT 'Para cada modelo, h·° diversos tipos de configuraÁıes possÌveis e exclusivas para cada modelo, sendo cada configuraÁ„o È formada por v·rios tipos de acessÛrios e motorizaÁ„o. ';
+ALTER TABLE SGA.ACESSORIOVEICULO COMMENT 'Cada tipo de acessÛrio e caracterizado por um cÛdigo, nome e custo, e diferenciado para cada modelo de carro.';
+ALTER TABLE SGA.CONCESSIONARIA COMMENT 'A fabrica n„o vendem seus veÌculos para a rede de concession·rias associada ‡† marca, n„o vendendo diretamente para o Usu·rio final, por isso È necess·rio saber, a Raz„o social, CNPJ, endereÁos, telefones, e os nomes de contato das diversas redes de concession·rias.';
+ALTER TABLE SGA.FORNECEDOR COMMENT 'Os fabricantes de peÁas sÛ produzem peÁas e os de acessÛrios sÛ produzem acessÛrios. As informaÁıes relevantes de fornecedores s„o: Raz„o social, CNPJ, endereÁo, telefones e nome de contato.';
+ALTER TABLE SGA.MOTORIZACAO COMMENT 'As informaÁıes relevantes para a motorizaÁ„o s„o:  Potencia em HP, velocidade final, autonomia (consumo em litros por tipo de combustÌvel).';
+ALTER TABLE SGA.PECA COMMENT 'Muitas das peÁas que comp√µem os carros s√£o produzidas por uma rede de fabricantes de peÁas sendo que para cada tipo de peÁa pode ser fornecida por mais de um fornecedor.';
+ALTER TABLE SGA.PECAVEICULO COMMENT 'Muitas das peÁas que compıem os carros s„o produzidas por uma rede de fabricantes de peÁas sendo que para cada tipo de peÁa pode ser fornecida por mais de um fornecedor.';
+ALTER TABLE SGA.VEICULO COMMENT 'A XXX montadora de carros produz v·rios modelos de carros de passeio e de transporte leve.';
 ALTER TABLE SGA.PERFIL COMMENT 'Tabela de Perfil';
-ALTER TABLE SGA.USUARIO COMMENT 'Tabela de Usu√°rios';
+ALTER TABLE SGA.USUARIO COMMENT 'Tabela de Usu·rios';
+
+CREATE USER 'sga'@'localhost' IDENTIFIED BY 'sga';
+GRANT ALL PRIVILEGES ON `sga` . * TO 'sga'@'localhost';
 
 insert into sga.perfil (nom_perfil) values ('Administrador');
 insert into sga.usuario (nom_usuario, loginname, seq_perfil) values ('admin', 'admin', 1);

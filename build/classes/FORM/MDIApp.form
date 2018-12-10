@@ -21,7 +21,7 @@
                   <KeyStroke key="Shift+Alt+A"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/ICON/acessorio.png"/>
+                  <Image iconType="3" name="/ICON/acessorio_veiculo.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Acess&#xf3;rios"/>
               </Properties>
@@ -171,7 +171,7 @@
                   <KeyStroke key="Shift+Ctrl+Alt+A"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/ICON/acessorio.png"/>
+                  <Image iconType="3" name="/ICON/acessorio_veiculo.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Acess&#xf3;rios"/>
               </Properties>
@@ -265,7 +265,7 @@
                   <KeyStroke key="Shift+Ctrl+A"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/ICON/acessorio.png"/>
+                  <Image iconType="3" name="/ICON/acessorio_veiculo.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Acess&#xf3;rios"/>
               </Properties>

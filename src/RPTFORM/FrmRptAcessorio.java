@@ -26,16 +26,8 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-/**
- *
- * @author Claudio
- */
 public class FrmRptAcessorio extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FrmConsAcessorio
-     * @throws java.lang.Exception
-     */
     public FrmRptAcessorio() throws Exception {
         initComponents();
         this.PreencherTabela();
@@ -72,9 +64,8 @@ public class FrmRptAcessorio extends javax.swing.JInternalFrame {
         Connection connection = null;
         try {
             appBean ab = new appBean();
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            String oracleURL = "jdbc:oracle:thin:@" + frmLogin.server + ":1521:" + frmLogin.sid;
-            connection = DriverManager.getConnection(oracleURL, frmLogin.username, frmLogin.password);
+            Class.forName(ab.getClassforname());
+            connection = DriverManager.getConnection(ab.getUrl(), ab.getUsername(), ab.getPassword());
             connection.setAutoCommit(false);
         } catch (SQLException exception) {
         }

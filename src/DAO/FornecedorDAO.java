@@ -103,7 +103,7 @@ public class FornecedorDAO {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             cn = DriverManager.getConnection(ab.getUrl());
 
-            cst = cn.prepareCall("{call SGA.sp_inc_fornecedor(?, ?, ?, ?, ?, ?, ?, ?)}");
+            cst = cn.prepareCall("{call sp_inc_fornecedor(?, ?, ?, ?, ?, ?, ?, ?)}");
             cst.setString(1, F.getNOM_FORNECEDOR());
             cst.setString(2, F.getNOM_FANTASIA());
             cst.setString(3, F.getNUM_CNPJ());

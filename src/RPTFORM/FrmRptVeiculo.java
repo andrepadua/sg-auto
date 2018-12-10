@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package RPTFORM;
 
+import BEAN.appBean;
 import BUS.VeiculoBUS;
 import FORM.frmLogin;
 import MODELS.Veiculo;
@@ -30,17 +26,8 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-/**
- *
- * @author Claudio
- */
 public class FrmRptVeiculo extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FrmConsVeiculo
-     *
-     * @throws java.lang.Exception
-     */
     public FrmRptVeiculo() throws Exception {
         initComponents();
         this.PreencherTabela();
@@ -66,7 +53,7 @@ public class FrmRptVeiculo extends javax.swing.JInternalFrame {
                 });
             }
             tblResult.setModel(dtm);
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
@@ -74,9 +61,9 @@ public class FrmRptVeiculo extends javax.swing.JInternalFrame {
     public static Connection establishConnection() throws ClassNotFoundException, SQLException {
         Connection connection = null;
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            String oracleURL = "jdbc:oracle:thin:@" + frmLogin.server + ":1521:" + frmLogin.sid;
-            connection = DriverManager.getConnection(oracleURL, frmLogin.username, frmLogin.password);
+            appBean ab = new appBean();
+            Class.forName(ab.getClassforname());
+            connection = DriverManager.getConnection(ab.getUrl(), ab.getUsername(), ab.getPassword());
             connection.setAutoCommit(false);
         } catch (SQLException exception) {
         }

@@ -4,6 +4,7 @@ import CLASS.SegSistema;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import Class.ClsConn;
+import java.awt.HeadlessException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -127,9 +128,6 @@ public class frmLogin extends javax.swing.JFrame {
         password = txtPassword.getText();
         msg = null;
         try {
-            ClsConn conn = new ClsConn();
-            conn.Connect();
-            conn.Disconnect();
             if (pCheckUsuCadSis() > 0) {
                 this.pChekSegSist();
                 MDIApp frm = new MDIApp();
@@ -139,10 +137,8 @@ public class frmLogin extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(btnConnect, "Usuário não Cadastrado na Aplicação");
             }
-        } catch (SQLException ex) {
+        } catch (HeadlessException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, msg);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnConnectActionPerformed
